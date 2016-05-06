@@ -58,6 +58,9 @@ function update_demo_file(){
   local org;
   [ "x$cur" == "x" ] && return;
 
+  [ -f $REMOTE_FILE ] && org=`cat $REMOTE_FILE`
+  [ "x$org" == "x$cur" ] && return;
+
   pushd $ROOT
 
   git pull
