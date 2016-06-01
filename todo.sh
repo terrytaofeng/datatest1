@@ -36,6 +36,7 @@ function update_ip_file(){
   pushd $ROOT
 
   git pull
+  git push 
   local org;
   [ -f $REMOTE_FILE ] && org=`cat $REMOTE_FILE|decrypt_data $key`
 
@@ -58,10 +59,19 @@ function update_demo_file(){
   local org;
   [ "x$cur" == "x" ] && return;
 
+
+  pushd $ROOT
+
+  if git status --porcelain|grep ^M;then
+      git pull
+      git commit -m 'update'
+      git push
+  fi
+
+
   [ -f $REMOTE_FILE ] && org=`cat $REMOTE_FILE`
   [ "x$org" == "x$cur" ] && return;
 
-  pushd $ROOT
 
   git pull
 
@@ -77,6 +87,8 @@ EOF
     git commit -m 'update'
     git push
   fi
+
+
 
 
   popd
