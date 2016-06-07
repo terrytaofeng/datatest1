@@ -5,7 +5,7 @@ ROOT=`dirname $0`
 ROOT=`(cd $ROOT;pwd)`
 
 function get_remoter_ip(){
-  wget --timeout=5 -qO- http://ipecho.net/plain
+  wget --timeout=10 -qO- http://ipecho.net/plain
 }
 
 
