@@ -60,11 +60,16 @@ function update_demo_file(){
   [ "x$cur" == "x" ] && return;
 
 
+  export LANG=c
   pushd $ROOT
 
   if git status --porcelain|grep ^M;then
       git pull
       git commit -m 'update'
+      git push
+  fi
+
+  if git status|grep "Your branch is ahead of";then
       git push
   fi
 
